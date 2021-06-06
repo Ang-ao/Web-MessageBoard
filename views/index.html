@@ -1,0 +1,35 @@
+{{extend './_layouts/home.html'}}
+
+{{block 'title'}}{{'aliuyan - 首页'}}{{/block}}
+
+{{block 'body'}}
+
+<div class="fabu">
+    <div class="liuyank">
+        <button class="sendly" id="sendBtn">Send message</button>
+    </div>
+</div>
+    <div class="fgx"></div>
+
+<section class="container">
+  <ul class="media-list">
+    {{ each liuyan }}
+      <li class="media">
+        <div class="media-body">
+          <p class="fb_msg"><span class="fb_name">{{ $value.nickname }}</span> : <span class="fb_nr"> {{ $value.message }} </span> <span class="fb_time">{{ $value.send_time }}</span></p>
+        </div>
+      </li>
+    {{ /each }}
+  </ul>
+</section>
+
+<script>
+    $(function(){
+        $('#sendBtn').click(function () {
+            window.location.href = '/send'
+        })
+
+    });
+</script>
+
+{{/block}}

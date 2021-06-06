@@ -1,0 +1,66 @@
+{{extend './_layouts/home.html'}}
+
+{{block 'title'}}{{'aliuyan - 发送'}}{{/block}}
+
+{{block 'body'}}
+
+<form action="/send" id="send_msg_form" method="post">
+      <div class="form_group">
+        <label for="nickname">昵称</label>
+        <input type="text" class="form-control" id="nickname" name="nickname" placeholder="Nickname">
+        <div id="nick_id" class="nick">
+          <span class="nick_text">请输入你的昵称!</span>
+        </div>
+      </div>
+      <div class="form_group">
+        <label for="message">内容</label>
+        <input type="text" class="form-control" id="message" name="message" placeholder="Message">
+        <div id="msg_id" class="msg">
+          <span class="pwd_text">请输入你的内容!</span>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success btn-block">发送</button>
+      <button type ="button" class="btn btn-success btn-block" id="send_exit">退出</button>
+</form>
+
+<script>
+    $('#send_msg_form').on('submit', function (e) {
+      var $nickname = $('#nickname').val()
+      var $message = $('#message').val()
+
+      if ($nickname == "") {
+        $('#nick_id').show()
+        return false;
+      } 
+      if ($message == "") {
+        $('#msg_id').show()
+        return false;
+      }
+
+      e.preventDefault()
+      var formData = $(this).serialize()
+      $.ajax({
+        url: '/send',
+        type: 'post',
+        data: formData,
+        dataType: 'json',
+        success: function (data) {
+          var err_code = data.err_code
+          if (0 == err_code) {
+            // 服务端重定向针对异步请求无效
+            window.alert('发送成功')
+            window.location.href = '/'
+          }
+          else if(500 == err_code)
+          {
+            window.alert('服务器繁忙!请稍后再试。。。')
+          }
+        }
+      })
+    })
+
+    $("#send_exit").click(function(){
+      window.location.href = '/'
+    })
+</script>
+{{/block}}

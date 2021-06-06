@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <title>{{block 'title'}}aliuyan{{/block}}</title>
+  <link rel="stylesheet" href="/public/css/main.css">
+  <link rel="stylesheet" href="/public/css/reset.css">
+  <script src="/node_modules/jquery/dist/jquery.js"></script>
+  {{block 'head'}}{{/block}}
+</head>
+
+<body style = "background: url(./public/img/background.png) 0% 0% / cover no-repeat fixed;">
+  {{include '../_partials/header.html'}}
+  {{block 'body'}}{{/block}}
+  {{include '../_partials/footer.html'}}
+  {{block 'script'}}{{/block}}
+</body>
+<!-- <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script> -->
+</html>
